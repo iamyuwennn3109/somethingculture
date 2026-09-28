@@ -1,827 +1,794 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>有點東西傳媒公司 | Something Culture Media</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #C9A962;
-            --gold-light: #E8D5A3;
-            --gold-dark: #A68B4B;
-            --black: #0D0D0D;
-            --black-light: #1A1A1A;
-            --black-lighter: #2D2D2D;
-            --white: #FFFFFF;
-            --gray: #888888;
-            --gray-light: #CCCCCC;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Noto Serif SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--black);
-            color: var(--white);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* 导航栏 */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo img {
-            height: 45px;
-            width: auto;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero区域 */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, var(--black) 0%, var(--black-light) 50%, var(--black) 100%);
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 80%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(201, 169, 98, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-            padding: 0 20px;
-        }
-        
-        .hero-logo {
-            width: 180px;
-            margin-bottom: 40px;
-            filter: drop-shadow(0 10px 40px rgba(201, 169, 98, 0.2));
-        }
-        
-        .hero h1 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: 8px;
-        }
-        
-        .hero h1 span {
-            color: var(--gold);
-        }
-        
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--gray);
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-        }
-        
-        .hero-tagline {
-            font-size: 24px;
-            color: var(--gold);
-            letter-spacing: 12px;
-            margin-bottom: 50px;
-        }
-        
-        .hero-desc {
-            max-width: 600px;
-            margin: 0 auto 50px;
-            font-size: 16px;
-            color: var(--gray-light);
-            line-height: 2;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 18px 50px;
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 3px;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gold);
-            transition: left 0.4s;
-            z-index: -1;
-        }
-        
-        .cta-button:hover {
-            color: var(--black);
-        }
-        
-        .cta-button:hover::before {
-            left: 0;
-        }
-        
-        /* 通用区块 */
-        section {
-            padding: 120px 60px;
-            position: relative;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-        
-        .section-label {
-            font-size: 12px;
-            color: var(--gold);
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        .section-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 42px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        
-        .section-title span {
-            color: var(--gold);
-        }
-        
-        .section-desc {
-            color: var(--gray);
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* 关于我们 */
-        .about {
-            background: var(--black-light);
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .about-text {
-            font-size: 16px;
-            line-height: 2;
-            color: var(--gray-light);
-        }
-        
-        .about-text p {
-            margin-bottom: 25px;
-        }
-        
-        .about-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 40px 30px;
-            background: var(--black);
-            border: 1px solid rgba(201, 169, 98, 0.2);
-            transition: all 0.3s;
-        }
-        
-        .stat-item:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
-        
-        .stat-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: var(--gray);
-            letter-spacing: 2px;
-        }
-        
-        /* 服务板块 */
-        .services {
-            background: var(--black);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .service-card {
-            background: var(--black-light);
-            padding: 50px 40px;
-            border: 1px solid rgba(201, 169, 98, 0.1);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 0;
-            background: var(--gold);
-            transition: height 0.4s;
-        }
-        
-        .service-card:hover::before {
-            height: 100%;
-        }
-        
-        .service-card:hover {
-            border-color: rgba(201, 169, 98, 0.3);
-            transform: translateY(-10px);
-        }
-        
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            border: 1px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-            color: var(--gold);
-        }
-        
-        .service-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--white);
-        }
-        
-        .service-desc {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-        
-        .service-list {
-            margin-top: 25px;
-            list-style: none;
-        }
-        
-        .service-list li {
-            padding: 8px 0;
-            font-size: 13px;
-            color: var(--gray-light);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .service-list li:last-child {
-            border-bottom: none;
-        }
-        
-        /* 案例展示 */
-        .cases {
-            background: var(--black-light);
-        }
-        
-        .cases-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .case-item {
-            position: relative;
-            height: 400px;
-            background: var(--black);
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .case-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.6s;
-        }
-        
-        .case-item:hover .case-bg {
-            transform: scale(1.05);
-        }
-        
-        .case-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.3) 50%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 40px;
-        }
-        
-        .case-category {
-            font-size: 12px;
-            color: var(--gold);
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-        
-        .case-title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .case-desc {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-        
-        /* 联系区域 */
-        .contact {
-            background: var(--black);
-            position: relative;
-        }
-        
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-        
-        .contact-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
-        }
-        
-        .contact-item {
-            padding: 30px;
-        }
-        
-        .contact-label {
-            font-size: 12px;
-            color: var(--gold);
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-        
-        .contact-value {
-            font-size: 16px;
-            color: var(--white);
-        }
-        
-        /* 页脚 */
-        footer {
-            background: var(--black-light);
-            padding: 60px;
-            text-align: center;
-            border-top: 1px solid rgba(201, 169, 98, 0.1);
-        }
-        
-        .footer-logo {
-            width: 120px;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-        
-        .footer-text {
-            font-size: 12px;
-            color: var(--gray);
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-copy {
-            font-size: 12px;
-            color: var(--gray);
-        }
-        
-        /* 响应式 */
-        @media (max-width: 1024px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav {
-                padding: 15px 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            section {
-                padding: 80px 20px;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-                letter-spacing: 4px;
-            }
-            
-            .hero-tagline {
-                font-size: 16px;
-                letter-spacing: 6px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
-            
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-grid,
-            .cases-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* 动画 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有點東西傳媒 | Something Culture Media — 香港創意營銷與 IP 打造</title>
+<meta name="description" content="有點東西傳媒有限公司（香港）—— 創意營銷、個人 IP 打造。為香港保險、地產、財富管理從業者運營微信視頻號，從人設定位、腳本策劃到拍攝製作，完成內地高端客戶引流。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0C11'/%3E%3Crect x='8' y='8' width='84' height='84' rx='24' fill='none' stroke='%23C9A45C' stroke-width='2.4'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23C9A45C' stroke-width='1.1' opacity='.45'/%3E%3Ccircle cx='50' cy='50' r='12.5' fill='%23C9A45C'/%3E%3Ccircle cx='85' cy='15' r='5.4' fill='%23C9A45C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   配色系統 —— 源自 Logo 方案 A「香江金」
+   ink 墨玉黑 / gold 香檳金 / paper 月白 / mute 石灰
+   ============================================================ */
+:root{
+    --ink:#0A0C11;
+    --ink-2:#10141B;
+    --ink-3:#161B24;
+    --gold:#C9A45C;
+    --gold-2:#E3C88C;
+    --gold-3:#96793F;
+    --paper:#F4F1EA;
+    --mute:#8C8C8C;
+    --mute-2:#B9B4AA;
+    --line:rgba(201,164,92,.16);
+    --serif:'Noto Serif SC','Songti SC','STSong','Source Han Serif SC',serif;
+    --sans:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    font-family:var(--sans);
+    background:var(--ink);
+    color:var(--paper);
+    line-height:1.75;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* ---------- 通用 ---------- */
+section{padding:130px 60px;position:relative}
+.wrap{max-width:1240px;margin:0 auto}
+.eyebrow{font-size:11px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;margin-bottom:22px}
+.sec-title{font-family:var(--serif);font-size:44px;font-weight:600;letter-spacing:.06em;margin-bottom:22px;line-height:1.3}
+.sec-title em{font-style:normal;color:var(--gold)}
+.sec-desc{color:var(--mute);font-size:16px;max-width:640px}
+.head-center{text-align:center;margin-bottom:76px}
+.head-center .sec-desc{margin:0 auto}
+.rule{width:52px;height:1px;background:var(--gold);margin:26px 0}
+.head-center .rule{margin:26px auto}
+
+/* ---------- 按鈕 ---------- */
+.btn{
+    display:inline-block;padding:17px 46px;
+    border:1px solid var(--gold);color:var(--gold);
+    text-decoration:none;font-size:13px;letter-spacing:.28em;
+    position:relative;overflow:hidden;transition:color .4s;
+    background:transparent;cursor:pointer;font-family:var(--sans);
+}
+.btn::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
+.btn:hover{color:var(--ink)}
+.btn:hover::before{transform:translateX(0)}
+.btn.solid{background:var(--gold);color:var(--ink)}
+.btn.solid::before{background:var(--gold-2)}
+.btn.solid:hover{color:var(--ink)}
+
+/* ---------- 導航 ---------- */
+nav{
+    position:fixed;top:0;left:0;width:100%;z-index:1000;
+    padding:22px 60px;display:flex;align-items:center;justify-content:space-between;
+    background:rgba(10,12,17,.72);backdrop-filter:blur(18px);
+    border-bottom:1px solid transparent;transition:padding .35s,border-color .35s,background .35s;
+}
+nav.solid{padding:14px 60px;background:rgba(10,12,17,.94);border-bottom-color:var(--line)}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand svg{width:42px;height:42px;flex:none}
+.brand .bt{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:.18em;color:var(--paper);line-height:1.2}
+.brand .bs{font-size:8.5px;letter-spacing:.3em;color:var(--mute);text-transform:uppercase;margin-top:3px}
+.nav-links{display:flex;gap:38px;list-style:none;align-items:center}
+.nav-links a{
+    color:var(--mute-2);text-decoration:none;font-size:13px;
+    letter-spacing:.14em;transition:color .3s;position:relative;padding-bottom:4px;
+}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.hot{color:var(--gold)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--paper);width:42px;height:42px;cursor:pointer;font-size:16px}
+
+/* ---------- HERO ---------- */
+.hero{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:160px 60px 100px;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 50% 40%,#14181F 0%,var(--ink) 68%);
+}
+.hero::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse at 18% 78%,rgba(201,164,92,.10) 0%,transparent 48%),
+      radial-gradient(ellipse at 84% 22%,rgba(201,164,92,.07) 0%,transparent 48%);
+}
+/* 背景：logo 符號的放大負形 */
+.hero::after{
+    content:'';position:absolute;top:50%;left:50%;width:760px;height:760px;
+    transform:translate(-50%,-50%);pointer-events:none;opacity:.045;
+    background:
+      radial-gradient(circle,transparent 0 18%,var(--gold) 18% 18.6%,transparent 19%),
+      radial-gradient(circle at 50% 50%,var(--gold) 0 .6%,transparent 1.2%);
+    background-size:100% 100%,100% 100%;
+    mask:radial-gradient(circle,#000 0 60%,transparent 72%);
+    -webkit-mask:radial-gradient(circle,#000 0 60%,transparent 72%);
+}
+.hero-in{position:relative;z-index:2;max-width:820px}
+.hero-logo{width:104px;margin-bottom:44px;filter:drop-shadow(0 12px 44px rgba(201,164,92,.28))}
+.hero h1{font-family:var(--serif);font-size:62px;font-weight:700;letter-spacing:.14em;margin-bottom:20px;line-height:1.2}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-en{font-size:11.5px;letter-spacing:.5em;color:var(--mute);margin-bottom:34px;text-transform:uppercase}
+.hero-tag{font-family:var(--serif);font-size:22px;letter-spacing:.5em;color:var(--gold-2);margin-bottom:38px}
+.hero-desc{color:var(--mute-2);font-size:16.5px;line-height:2.1;max-width:660px;margin:0 auto 50px}
+.hero-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.scroll-hint{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.32em;color:var(--mute);opacity:.6}
+
+/* ---------- 關於 ---------- */
+.about{background:var(--ink-2)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:90px;align-items:center}
+.about-text p{color:var(--mute-2);font-size:16px;margin-bottom:26px}
+.about-text p strong{color:var(--paper);font-weight:600}
+.about-text .quote{
+    font-family:var(--serif);font-size:20px;color:var(--gold-2);
+    border-left:2px solid var(--gold);padding-left:22px;margin-top:34px;line-height:1.9;
+}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.stat{
+    background:var(--ink);border:1px solid var(--line);padding:40px 26px;text-align:center;
+    transition:border-color .35s,transform .35s;
+}
+.stat:hover{border-color:var(--gold);transform:translateY(-6px)}
+.stat .n{font-family:var(--serif);font-size:44px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:14px}
+.stat .l{font-size:12.5px;letter-spacing:.18em;color:var(--mute)}
+
+/* ---------- 服務 ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{
+    background:var(--ink-2);border:1px solid var(--line);padding:46px 38px;
+    position:relative;overflow:hidden;transition:border-color .4s,transform .4s,background .4s;
+}
+.card::before{content:'';position:absolute;left:0;top:0;width:2px;height:0;background:var(--gold);transition:height .45s}
+.card:hover{border-color:rgba(201,164,92,.38);transform:translateY(-8px);background:var(--ink-3)}
+.card:hover::before{height:100%}
+.card .num{
+    width:52px;height:52px;border:1px solid var(--gold);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;letter-spacing:.05em;margin-bottom:28px;
+}
+.card h3{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:16px;letter-spacing:.06em}
+.card p{font-size:14px;color:var(--mute);line-height:1.9;margin-bottom:24px}
+.card ul{list-style:none;border-top:1px solid rgba(255,255,255,.06);padding-top:18px}
+.card li{font-size:13px;color:var(--mute-2);padding:7px 0;padding-left:16px;position:relative}
+.card li::before{content:'';position:absolute;left:0;top:16px;width:5px;height:1px;background:var(--gold)}
+.card.feature{background:linear-gradient(160deg,rgba(201,164,92,.09),var(--ink-2) 60%);border-color:rgba(201,164,92,.34)}
+.card.feature .num{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+/* ---------- 業務版圖 ---------- */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:26px}
+.ov-card{
+    border:1px solid var(--line);padding:44px 40px;background:var(--ink-2);
+    transition:border-color .4s,transform .4s;
+}
+.ov-card:hover{border-color:rgba(201,164,92,.4);transform:translateY(-5px)}
+.ov-card .ovk{font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:16px}
+.ov-card h3{font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:10px;letter-spacing:.06em}
+.ov-card .ovwho{font-size:13.5px;color:var(--mute);margin-bottom:24px;line-height:1.8}
+.ov-card ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.ov-card li{font-size:13px;color:var(--mute-2);border:1px solid var(--line);padding:7px 14px}
+.ov-card.focus{background:linear-gradient(160deg,rgba(201,164,92,.09),var(--ink-2) 60%);border-color:rgba(201,164,92,.34)}
+.ov-mid{
+    border:1px solid var(--line);padding:28px 40px;display:flex;align-items:center;
+    gap:30px;flex-wrap:wrap;background:rgba(255,255,255,.012);
+}
+.ov-mid .ovmk{font-size:11px;letter-spacing:.3em;color:var(--gold);flex:none}
+.ov-mid ul{list-style:none;display:flex;flex-wrap:wrap;gap:20px}
+.ov-mid li{font-size:13.5px;color:var(--mute-2)}
+.ov-mid li::before{content:'—';color:var(--gold);margin-right:8px}
+
+/* ---------- IP 打造（聚焦板塊） ---------- */
+.ip{
+    background:
+      radial-gradient(ellipse at 82% 8%,rgba(201,164,92,.10) 0%,transparent 52%),
+      linear-gradient(180deg,var(--ink) 0%,#0C1017 50%,var(--ink) 100%);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.ip-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--gold);color:var(--gold);
+    font-size:10.5px;letter-spacing:.3em;padding:7px 16px;margin-bottom:26px;text-transform:uppercase;
+}
+/* 三個判斷 */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-bottom:96px}
+.why-item{border-top:1px solid var(--gold);padding-top:28px}
+.why-item .k{font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.why-item h4{font-family:var(--serif);font-size:21px;font-weight:600;margin-bottom:14px;letter-spacing:.06em}
+.why-item p{font-size:14.5px;color:var(--mute);line-height:1.95}
+
+/* 五步流程 */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:96px;border-top:1px solid var(--line)}
+.step{
+    padding:34px 26px 0;border-right:1px solid var(--line);position:relative;
+}
+.step:last-child{border-right:none}
+.step::before{
+    content:'';position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--gold);transition:width .6s;
+}
+.step.in::before{width:100%}
+.step .sn{font-family:var(--serif);font-size:32px;color:rgba(201,164,92,.34);line-height:1;margin-bottom:20px}
+.step h5{font-size:16.5px;font-weight:600;margin-bottom:12px;letter-spacing:.06em}
+.step p{font-size:13.5px;color:var(--mute);line-height:1.9}
+
+/* IP 案例 */
+.ip-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-bottom:90px}
+.ipc{
+    background:var(--ink-2);border:1px solid var(--line);overflow:hidden;
+    display:flex;flex-direction:column;transition:border-color .4s,transform .4s;
+}
+.ipc:hover{border-color:rgba(201,164,92,.4);transform:translateY(-6px)}
+.ipc-visual{
+    height:240px;position:relative;overflow:hidden;
+    background-size:cover;background-position:top center;
+    background-color:var(--ink-2);
+}
+.ipc-visual::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(10,12,17,.6) 0%,rgba(10,12,17,0) 42%);
+}
+.ipc-visual .tag{
+    position:absolute;left:18px;bottom:14px;z-index:2;
+    font-size:11px;letter-spacing:.26em;color:var(--gold);
+    border:1px solid rgba(201,164,92,.55);padding:6px 14px;
+    background:rgba(10,12,17,.78);backdrop-filter:blur(4px);
+}
+.ipc-body{padding:34px 30px 36px;flex:1;display:flex;flex-direction:column}
+.ipc-body .cat{font-size:10.5px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.ipc-body h4{font-family:var(--serif);font-size:20px;font-weight:600;margin-bottom:10px;letter-spacing:.05em}
+.ipc-body .who{font-size:12.5px;color:var(--mute);margin-bottom:22px;line-height:1.8}
+.ipc-body .how{font-size:13.5px;color:var(--mute-2);line-height:1.95;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:22px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:auto}
+.metric .mv{font-family:var(--serif);font-size:22px;color:var(--gold);line-height:1.2}
+.metric .ml{font-size:10.5px;color:var(--mute);letter-spacing:.08em;margin-top:5px;line-height:1.5}
+
+/* 適合人群 */
+.who-row{
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:34px;
+}
+.chip{
+    border:1px solid var(--line);padding:11px 22px;font-size:13.5px;color:var(--mute-2);
+    letter-spacing:.06em;transition:all .3s;
+}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+.ip-note{text-align:center;color:var(--mute);font-size:12.5px;margin-bottom:38px;letter-spacing:.04em}
+.ip-cta{text-align:center}
+
+/* 合作模式 */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-bottom:80px}
+.phase{border:1px solid var(--line);padding:36px 32px;background:rgba(255,255,255,.012)}
+.phase .pt{font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:12px}
+.phase h5{font-family:var(--serif);font-size:19px;margin-bottom:16px;letter-spacing:.06em}
+.phase p{font-size:13.5px;color:var(--mute);line-height:1.9}
+
+/* ---------- 案例 ---------- */
+.cases{background:var(--ink-2)}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+.case{
+    position:relative;height:390px;overflow:hidden;background:var(--ink);
+    border:1px solid var(--line);cursor:pointer;
+}
+.case-bg{
+    position:absolute;inset:0;transition:transform .7s cubic-bezier(.2,.7,.3,1);
+    background-size:cover;background-position:center;
+}
+.case:hover .case-bg{transform:scale(1.06)}
+.case-ov{
+    position:absolute;inset:0;padding:40px;display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(to top,rgba(10,12,17,.97) 0%,rgba(10,12,17,.55) 46%,rgba(10,12,17,.05) 100%);
+}
+.case-ov .cat{font-size:10.5px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.case-ov h3{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:12px;letter-spacing:.05em}
+.case-ov p{font-size:14px;color:var(--mute);line-height:1.9}
+
+/* ---------- 聯繫 ---------- */
+.contact{text-align:center;position:relative}
+.contact::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.contact .wrap{max-width:820px}
+.c-info{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:66px}
+.c-item{padding:32px 20px;border:1px solid var(--line)}
+.c-item .l{font-size:10.5px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.c-item .v{font-size:15px;color:var(--paper);letter-spacing:.04em}
+.c-item .v a{color:inherit;text-decoration:none}
+.c-item .v a:hover{color:var(--gold)}
+
+/* ---------- 頁腳 ---------- */
+footer{background:var(--ink-2);padding:66px 60px 54px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;max-width:1240px;margin:0 auto}
+.foot-brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.foot-brand svg{width:38px;height:38px}
+.foot-brand .bt{font-family:var(--serif);font-size:16px;letter-spacing:.18em}
+.foot-slogan{font-size:11.5px;letter-spacing:.34em;color:var(--gold);margin-bottom:14px}
+.foot small{font-size:12px;color:var(--mute);letter-spacing:.04em}
+.foot-links{display:flex;gap:34px;list-style:none}
+.foot-links a{color:var(--mute);text-decoration:none;font-size:13px;letter-spacing:.1em;transition:color .3s}
+.foot-links a:hover{color:var(--gold)}
+.copy{max-width:1240px;margin:44px auto 0;padding-top:26px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mute);letter-spacing:.06em;text-align:center}
+
+/* ---------- 動畫 ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .85s cubic-bezier(.2,.7,.3,1),transform .85s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 響應式 ---------- */
+@media(max-width:1100px){
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .step{border-bottom:1px solid var(--line)}
+    .ip-cases{grid-template-columns:1fr}
+    .why{grid-template-columns:1fr;gap:34px}
+    .phases{grid-template-columns:1fr}
+}
+@media(max-width:860px){
+    nav{padding:14px 22px}
+    nav.solid{padding:12px 22px}
+    .nav-links{
+        display:none;position:absolute;top:100%;left:0;right:0;
+        background:rgba(10,12,17,.98);border-bottom:1px solid var(--line);
+        flex-direction:column;gap:0;padding:10px 0;
+    }
+    .nav-links.open{display:flex}
+    .nav-links li{width:100%}
+    .nav-links a{display:block;padding:15px 24px;font-size:14px}
+    .nav-toggle{display:block}
+    .brand .bs{display:none}
+    section{padding:88px 22px}
+    .hero{padding:130px 22px 90px}
+    .hero h1{font-size:34px;letter-spacing:.08em}
+    .hero-tag{font-size:15px;letter-spacing:.3em}
+    .sec-title{font-size:29px}
+    .about-grid,.ov-grid{grid-template-columns:1fr;gap:22px}
+    .svc-grid,.cases-grid,.c-info,.stats{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .ov-card{padding:32px 26px}
+    .ov-mid{padding:24px 26px;gap:18px}
+    .foot{padding:0 30px}
+    footer{padding:52px 22px 44px}
+    .metrics{grid-template-columns:1fr;gap:16px}
+}
+</style>
 </head>
 <body>
-    <!-- 導航 -->
-    <nav>
-        <div class="logo">
-            <img src="logo_youdongxi.png" alt="有點東西傳媒">
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">首頁</a></li>
-            <li><a href="#about">關於</a></li>
-            <li><a href="#services">服務</a></li>
-            <li><a href="#cases">案例</a></li>
-            <li><a href="#contact">聯繫</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <img src="logo_youdongxi.png" alt="有點東西傳媒" class="hero-logo">
-            <h1>有點<span>東西</span>傳媒</h1>
-            <p class="hero-subtitle">SOMETHING CULTURE MEDIA CO., LIMITED</p>
-            <p class="hero-tagline">創意 · 策略 · 影響力</p>
-            <p class="hero-desc">
-                我們是一家專注於市場營銷推廣的創意策略公司，<br>
-                以獨特的視角和專業的執行力，為品牌創造真正有價值的影響力。
-            </p>
-            <a href="#contact" class="cta-button">開始合作</a>
-        </div>
-    </section>
+<!-- ========== 導航 ========== -->
+<nav id="nav">
+    <a href="#home" class="brand">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <rect x="8" y="8" width="84" height="84" rx="24" stroke="#C9A45C" stroke-width="2.4"/>
+            <circle cx="50" cy="50" r="25" stroke="#C9A45C" stroke-width="1.1" opacity=".45"/>
+            <circle cx="50" cy="50" r="12.5" fill="#C9A45C"/>
+            <circle cx="85" cy="15" r="5.4" fill="#C9A45C"/>
+        </svg>
+        <span>
+            <span class="bt">有點東西傳媒</span>
+            <span class="bs">Something Culture Media</span>
+        </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">首頁</a></li>
+        <li><a href="#about">關於</a></li>
+        <li><a href="#services">服務</a></li>
+        <li><a href="#ip" class="hot">IP 打造</a></li>
+        <li><a href="#cases">案例</a></li>
+        <li><a href="#contact">聯繫</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">≡</button>
+</nav>
 
-    <!-- 關於我們 -->
-    <section class="about" id="about">
-        <div class="section-header">
-            <p class="section-label">About Us</p>
-            <h2 class="section-title">关于<span>我们</span></h2>
-            <p class="section-desc">用創意點燃品牌，用策略驅動增長</p>
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+    <div class="hero-in">
+        <svg class="hero-logo" viewBox="0 0 100 100" fill="none" aria-label="有點東西傳媒">
+            <rect x="8" y="8" width="84" height="84" rx="24" stroke="#C9A45C" stroke-width="2.4"/>
+            <circle cx="50" cy="50" r="25" stroke="#C9A45C" stroke-width="1.1" opacity=".45"/>
+            <circle cx="50" cy="50" r="12.5" fill="#C9A45C"/>
+            <circle cx="85" cy="15" r="5.4" fill="#C9A45C"/>
+        </svg>
+        <h1>有點<em>東西</em>傳媒</h1>
+        <p class="hero-en">Something Culture Media Co., Limited · Hong Kong</p>
+        <p class="hero-tag">創意 · IP · 增長</p>
+        <p class="hero-desc">
+            香港的創意營銷與個人 IP 打造公司。<br>
+            我們為品牌與專業人士搭建「被看見、被信任、被選擇」的內容路徑 ——
+            從策略到腳本，從拍攝到轉化。
+        </p>
+        <div class="hero-btns">
+            <a href="#ip" class="btn solid">了解 IP 打造</a>
+            <a href="#contact" class="btn">開始合作</a>
         </div>
-        <div class="about-content">
-            <div class="about-text">
-                <p>有點東西傳媒公司成立於創意與商業的交匯點，我們相信每一個品牌都有其獨特的故事等待被講述。我們的團隊由資深營銷專家、創意策劃人和數字媒體從業者組成，致力於為品牌提供從策略到執行的一站式營銷解決方案。</p>
-                <p>在這個信息爆炸的時代，我們深諳"注意力經濟"的本質。我們不做隨波逐流的跟隨者，而是堅持做有態度、有深度、有溫度的內容創造者。從品牌定位到傳播策略，從創意內容到媒介投放，我們用專業與熱情，幫助品牌在激烈的市場競爭中脫穎而出。</p>
-                <p>"有點東西"不僅是我們公司的名字，更是我們對每一個項目的承諾——我們要做的，永遠比預期更多一點。</p>
+    </div>
+    <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ========== 關於 ========== -->
+<section class="about" id="about">
+    <div class="wrap">
+        <div class="head-center reveal">
+            <p class="eyebrow">About Us</p>
+            <h2 class="sec-title">關於<em>我們</em></h2>
+            <div class="rule"></div>
+            <p class="sec-desc">用創意點燃品牌，用 IP 沉澱信任，用內容驅動增長</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>有點東西傳媒成立於香港，站在創意與商業的交匯點上。我們相信每一個品牌、每一位專業人士，都有其獨特的故事等待被講述 —— 而講述的方式，決定了它能被多少人記住。</p>
+                <p>團隊由資深營銷策略人、內容策劃與影像製作團隊組成，提供從<strong>品牌定位</strong>到<strong>個人 IP 孵化</strong>、從<strong>腳本策劃</strong>到<strong>拍攝執行</strong>的一站式服務。近年我們把重心放在一條更深的賽道上：幫助香港的專業代理人，通過微信視頻號，系統性地獲取內地高端客戶。</p>
+                <p>在這個注意力稀缺的時代，我們不做隨波逐流的跟隨者。我們做的是有態度、有深度、能帶來真實線索的內容。</p>
+                <p class="quote">「有點東西」不僅是公司的名字，<br>更是我們對每一個項目的承諾 ——<br>我們要做的，永遠比預期多一點。</p>
             </div>
-            <div class="about-stats">
-                <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">服務品牌</div>
+            <div class="stats reveal">
+                <div class="stat"><div class="n">50+</div><div class="l">服務品牌</div></div>
+                <div class="stat"><div class="n">80+</div><div class="l">孵化個人 IP</div></div>
+                <div class="stat"><div class="n">200+</div><div class="l">成功案例</div></div>
+                <div class="stat"><div class="n">10M+</div><div class="l">觸達用戶</div></div>
+                <div class="stat"><div class="n">48h</div><div class="l">單條內容交付週期</div></div>
+                <div class="stat"><div class="n">5年</div><div class="l">跨境內容經驗</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 業務版圖（總覽） ========== -->
+<section id="business">
+    <div class="wrap">
+        <div class="head-center reveal">
+            <p class="eyebrow">Business Overview</p>
+            <h2 class="sec-title">業務<em>版圖</em></h2>
+            <div class="rule"></div>
+            <p class="sec-desc">我們是一家立足香港的創意營銷公司，業務由兩條主線構成 —— 面向企業品牌的整合營銷，與面向專業個體的 IP 孵化。兩條主線共享同一套內容與製作中台。</p>
+        </div>
+
+        <div class="ov-grid">
+            <div class="ov-card reveal">
+                <p class="ovk">主線一 · BRAND MARKETING</p>
+                <h3>品牌營銷</h3>
+                <p class="ovwho">服務對象：企業品牌、新消費與科技客戶</p>
+                <ul>
+                    <li>品牌策略</li><li>創意內容</li><li>數字營銷</li>
+                    <li>活動策劃</li><li>公關傳播</li>
+                </ul>
+            </div>
+            <div class="ov-card focus reveal">
+                <p class="ovk">主線二 · IP INCUBATION · 核心增長業務</p>
+                <h3>個人 IP 打造</h3>
+                <p class="ovwho">服務對象：香港專業代理人、企業創始人</p>
+                <ul>
+                    <li>人設定位</li><li>腳本策劃</li><li>拍攝製作</li>
+                    <li>視頻號運營</li><li>線索轉化</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ov-mid reveal">
+            <p class="ovmk">內容與製作中台</p>
+            <ul>
+                <li>選題與腳本庫</li>
+                <li>香港本地拍攝</li>
+                <li>後期與字幕</li>
+                <li>合規複核</li>
+                <li>精準投流</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 服務 ========== -->
+<section id="services">
+    <div class="wrap">
+        <div class="head-center reveal">
+            <p class="eyebrow">Our Services</p>
+            <h2 class="sec-title">核心<em>服務</em></h2>
+            <div class="rule"></div>
+            <p class="sec-desc">從品牌策略到個人 IP 孵化，覆蓋內容生產與商業轉化的全鏈路</p>
+        </div>
+        <div class="svc-grid">
+            <div class="card reveal">
+                <div class="num">01</div>
+                <h3>品牌策略</h3>
+                <p>深入洞察市場與用戶需求，為品牌制定差異化的定位策略與傳播路徑。</p>
+                <ul><li>品牌定位與架構</li><li>市場調研與競品分析</li><li>品牌故事與價值主張</li><li>視覺識別系統規劃</li></ul>
+            </div>
+            <div class="card reveal">
+                <div class="num">02</div>
+                <h3>創意內容</h3>
+                <p>以創意為核心，打造能夠引發共鳴、驅動傳播並沉澱信任的優質內容。</p>
+                <ul><li>廣告創意與製作</li><li>短視頻內容策劃</li><li>社交媒體運營</li><li>KOL / KOC 合作</li></ul>
+            </div>
+            <div class="card feature reveal">
+                <div class="num">03</div>
+                <h3>IP 打造</h3>
+                <p>為香港專業代理人與企業創始人孵化個人 IP —— 人設定位、腳本策劃、拍攝製作、帳號運營、線索轉化，一條龍交付。</p>
+                <ul><li>個人 IP 定位與人設搭建</li><li>視頻號選題與腳本策劃</li><li>香港本地拍攝與後期</li><li>內地高端客戶引流</li></ul>
+            </div>
+            <div class="card reveal">
+                <div class="num">04</div>
+                <h3>數字營銷</h3>
+                <p>數據驅動的精準投放，讓每一分預算都產生可衡量的價值。</p>
+                <ul><li>媒介策略與投放</li><li>效果廣告優化</li><li>數據分析與洞察</li><li>私域流量運營</li></ul>
+            </div>
+            <div class="card reveal">
+                <div class="num">05</div>
+                <h3>活動策劃</h3>
+                <p>從線上到線下，打造沉浸式品牌體驗，建立深度用戶連接。</p>
+                <ul><li>新品發佈會</li><li>品牌快閃活動</li><li>行業峰會論壇</li><li>高端客戶私享會</li></ul>
+            </div>
+            <div class="card reveal">
+                <div class="num">06</div>
+                <h3>公關傳播</h3>
+                <p>構建品牌聲譽，管理公眾認知，在關鍵時刻為品牌發聲。</p>
+                <ul><li>媒體關係管理</li><li>危機公關應對</li><li>企業社會責任</li><li>行業影響力建設</li></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     IP 打造（聚焦板塊 —— 承接「業務版圖」主線二展開）
+     為香港專業代理人運營視頻號，完成內地高端客戶引流
+     注：以下數據為示例框架，上線前請替換為真實項目數據
+     ============================================================ -->
+<section class="ip" id="ip">
+    <div class="wrap">
+        <div class="head-center reveal">
+            <span class="ip-badge">主線二 · IP INCUBATION</span>
+            <h2 class="sec-title">讓香港專業代理人<br>被內地高端客戶<em>先看見，再信任</em></h2>
+            <div class="rule"></div>
+            <p class="sec-desc">在兩條主線中，個人 IP 孵化是近年增長最快、壁壘最深的一塊。我們為香港保險、地產、財富管理從業者運營微信視頻號 —— 從人設定位、腳本策劃、拍攝製作，到帳號運營與線索承接，搭建一條完整的內地高端客戶引流鏈路。</p>
+        </div>
+
+        <!-- 三個判斷 -->
+        <div class="why">
+            <div class="why-item reveal">
+                <p class="k">INSIGHT 01</p>
+                <h4>需求在內地</h4>
+                <p>高淨值家庭對港險、港房、跨境資產配置的需求持續上升。這類生意本質是「信人不信產品」—— 誰先被認識，誰就先被考慮。</p>
+            </div>
+            <div class="why-item reveal">
+                <p class="k">INSIGHT 02</p>
+                <h4>陣地在視頻號</h4>
+                <p>視頻號是唯一能在微信生態內跑通「看內容 → 加微信 → 進私域 → 線下成交」的平台，鏈路最短，用戶畫像與高淨值人群高度重合。</p>
+            </div>
+            <div class="why-item reveal">
+                <p class="k">INSIGHT 03</p>
+                <h4>壁壘在人設</h4>
+                <p>香港持牌身份、多年從業經歷，本身就是強信任背書。缺的從來不是資質，而是一個能把資質講成故事、並被持續看見的內容載體。</p>
+            </div>
+        </div>
+
+        <!-- 五步流程 -->
+        <div class="head-center reveal" style="margin-bottom:52px">
+            <p class="eyebrow">How We Work</p>
+            <h2 class="sec-title" style="font-size:32px">五步交付 · <em>從 0 到獲客</em></h2>
+        </div>
+        <div class="steps">
+            <div class="step reveal"><div class="sn">01</div><h5>人設定位</h5><p>梳理從業資質、服務半徑與個人故事，確立「專家型」而非「銷售型」的內容人格，並統一視覺與語言調性。</p></div>
+            <div class="step reveal"><div class="sn">02</div><h5>選題與腳本</h5><p>建立月度選題矩陣：政策解讀、案例複盤、港深生活、客戶問答。每條視頻配備完整分鏡腳本與開場鉤子。</p></div>
+            <div class="step reveal"><div class="sn">03</div><h5>拍攝製作</h5><p>香港本地拍攝團隊上門，燈光收音專業配置。單條成片含字幕、封面、剪輯、配樂與合規複核。</p></div>
+            <div class="step reveal"><div class="sn">04</div><h5>帳號運營</h5><p>視頻號 + 公眾號 + 朋友圈三端聯動。發布節奏、話題標籤、評論區互動與投流策略統一管理。</p></div>
+            <div class="step reveal"><div class="sn">05</div><h5>線索轉化</h5><p>評論區與私信標準話術、企業微信承接 SOP、客戶分層標籤，配合月度轉化複盤報告持續優化。</p></div>
+        </div>
+
+        <!-- IP 案例 -->
+        <div class="head-center reveal" style="margin-bottom:52px">
+            <p class="eyebrow">IP Cases</p>
+            <h2 class="sec-title" style="font-size:32px">他們已經跑通了 · <em>IP 實戰案例</em></h2>
+        </div>
+        <div class="ip-cases">
+
+            <div class="ipc reveal">
+                <div class="ipc-visual" style="background-image:url('images/ip_vicky.jpg')"><span class="tag">保險 IP</span></div>
+                <div class="ipc-body">
+                    <p class="cat">INSURANCE · 香港保誠 COT</p>
+                    <h4>雙城生活人設，把港險科普聊進日常</h4>
+                    <p class="who">香港永居 · 港漂 16 年｜香港保誠 COT · 實業創二代 · 中科大 EMBA｜人設定位「聊生活，也聊長期主義」</p>
+                    <p class="how">以雙城生活視角拆解港府政策與財富話題 ——「定居 16 年拆解港府 5 項隱藏紅包」「富豪財富邏輯」「二代標籤」等系列選題，把專業議題翻譯成內地家庭的日常語言。</p>
+                    <div class="metrics">
+                        <div class="metric"><div class="mv">114+</div><div class="ml">條<br>原創內容</div></div>
+                        <div class="metric"><div class="mv">2294</div><div class="ml">單條<br>最高點讚</div></div>
+                        <div class="metric"><div class="mv">16年</div><div class="ml">港漂經歷<br>信任背書</div></div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">200+</div>
-                    <div class="stat-label">成功案例</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">10M+</div>
-                    <div class="stat-label">觸達用戶</div>
-                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 服务 -->
-    <section class="services" id="services">
-        <div class="section-header">
-            <p class="section-label">Our Services</p>
-            <h2 class="section-title">核心<span>服务</span></h2>
-            <p class="section-desc">全方位的營銷解決方案，助力品牌實現商業目標</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">01</div>
-                <h3 class="service-title">品牌策略</h3>
-                <p class="service-desc">深入洞察市場與用戶需求，為品牌制定差異化的定位策略和傳播路徑。</p>
-                <ul class="service-list">
-                    <li>品牌定位與架構</li>
-                    <li>市場調研與競品分析</li>
-                    <li>品牌故事與價值主張</li>
-                    <li>視覺識別系統規劃</li>
-                </ul>
+            <div class="ipc reveal">
+                <div class="ipc-visual" style="background-image:url('images/ip_tubi.jpg')"><span class="tag">地產 IP</span></div>
+                <div class="ipc-body">
+                    <p class="cat">REAL ESTATE · 香港美聯物業客戶總監</p>
+                    <h4>帶你看真豪宅，做內地買家的線上置業顧問</h4>
+                    <p class="who">香港美聯物業客戶總監｜超過十年香港房產經驗｜連任公司精英會金精英</p>
+                    <p class="how">全實拍內容線 —— 啟德、半山、維港頭排新盤到觀塘寫字樓開箱，配合稅費與面積換算拆解；腳本一律以內地買家的真實提問為起點，用解答代替推銷。</p>
+                    <div class="metrics">
+                        <div class="metric"><div class="mv">176+</div><div class="ml">條<br>原創內容</div></div>
+                        <div class="metric"><div class="mv">10+年</div><div class="ml">香港房產<br>從業經驗</div></div>
+                        <div class="metric"><div class="mv">全實拍</div><div class="ml">豪宅與新盤<br>開箱系列</div></div>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">02</div>
-                <h3 class="service-title">創意內容</h3>
-                <p class="service-desc">以創意為核心，打造能夠引發共鳴、驅動傳播的優質內容。</p>
-                <ul class="service-list">
-                    <li>廣告創意與製作</li>
-                    <li>短視頻內容策劃</li>
-                    <li>社交媒體運營</li>
-                    <li>KOL/KOC合作</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">03</div>
-                <h3 class="service-title">數字營銷</h3>
-                <p class="service-desc">數據驅動的精準投放，讓每一分預算都產生最大價值。</p>
-                <ul class="service-list">
-                    <li>媒介策略與投放</li>
-                    <li>效果廣告優化</li>
-                    <li>數據分析與洞察</li>
-                    <li>私域流量運營</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">04</div>
-                <h3 class="service-title">活動策劃</h3>
-                <p class="service-desc">從線上到線下，打造沉浸式品牌體驗，建立深度用戶連接。</p>
-                <ul class="service-list">
-                    <li>新品發佈會</li>
-                    <li>品牌快閃活動</li>
-                    <li>行業峰會論壇</li>
-                    <li>用戶社群活動</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">05</div>
-                <h3 class="service-title">公關傳播</h3>
-                <p class="service-desc">構建品牌聲譽，管理公眾認知，在關鍵時刻為品牌發聲。</p>
-                <ul class="service-list">
-                    <li>媒體關係管理</li>
-                    <li>危機公關應對</li>
-                    <li>企業社會責任</li>
-                    <li>行業影響力建設</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">06</div>
-                <h3 class="service-title">整合營銷</h3>
-                <p class="service-desc">打通營銷全鏈路，實現品牌傳播與銷售轉化的協同增長。</p>
-                <ul class="service-list">
-                    <li>年度營銷規劃</li>
-                    <li>Campaign全案執行</li>
-                    <li>電商營銷支持</li>
-                    <li>跨界合作策劃</li>
-                </ul>
-            </div>
-        </div>
-    </section>
 
-    <!-- 案例 -->
-    <section class="cases" id="cases">
-        <div class="section-header">
-            <p class="section-label">Our Work</p>
-            <h2 class="section-title">精选<span>案例</span></h2>
-            <p class="section-desc">每一個項目，都是我們專業能力的證明</p>
+            <div class="ipc reveal">
+                <div class="ipc-visual" style="background-image:url('images/ip_gao.jpg')"><span class="tag">學者 IP</span></div>
+                <div class="ipc-body">
+                    <p class="cat">KOL CHANNEL · 國際問題學者</p>
+                    <h4>學者型自媒體，讓專業觀點成為頻道資產</h4>
+                    <p class="who">國際問題學者｜實名認證網絡自媒體｜207 條原創內容</p>
+                    <p class="how">以學者視角做時事解讀，統一封面視覺與欄目化運營，把零散評論沉澱為可持續漲粉、可持續變現的個人頻道資產。</p>
+                    <div class="metrics">
+                        <div class="metric"><div class="mv">207+</div><div class="ml">條<br>原創內容</div></div>
+                        <div class="metric"><div class="mv">1.6萬</div><div class="ml">單條<br>最高點讚</div></div>
+                        <div class="metric"><div class="mv">欄目化</div><div class="ml">統一封面<br>視覺體系</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 適合人群 -->
+        <div class="head-center reveal" style="margin-bottom:36px">
+            <p class="eyebrow">Who We Serve</p>
+            <h2 class="sec-title" style="font-size:28px">適合<em>誰</em></h2>
+        </div>
+        <div class="who-row reveal">
+            <span class="chip">保險代理人</span>
+            <span class="chip">地產代理</span>
+            <span class="chip">財富管理顧問</span>
+            <span class="chip">移民與身份規劃</span>
+            <span class="chip">家族辦公室</span>
+            <span class="chip">醫療與教育中介</span>
+            <span class="chip">企業創始人 IP</span>
+        </div>
+        <p class="ip-note reveal">我們只做高端客戶賽道 —— 選題、腳本、拍攝質感與投放策略，全部對標高淨值人群的閱讀習慣與決策邏輯。</p>
+
+        <!-- 合作模式 -->
+        <div class="phases">
+            <div class="phase reveal">
+                <p class="pt">PHASE 01 · 0–3 個月</p>
+                <h5>孵化期</h5>
+                <p>人設搭建、選題庫建立，每月穩定產出 8–12 條成片，完成帳號冷啟動。</p>
+            </div>
+            <div class="phase reveal">
+                <p class="pt">PHASE 02 · 4–6 個月</p>
+                <h5>增長期</h5>
+                <p>矩陣號擴張、精準投流放大爆款，重點是把播放量轉化為可跟進的線索。</p>
+            </div>
+            <div class="phase reveal">
+                <p class="pt">PHASE 03 · 持續</p>
+                <h5>收割期</h5>
+                <p>線索承接 SOP 落地、客戶分層與私域運營，讓內容資產持續產出可預測的客源。</p>
+            </div>
+        </div>
+
+        <div class="ip-cta reveal">
+            <a href="#contact" class="btn solid">預約個人 IP 診斷</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 案例 ========== -->
+<section class="cases" id="cases">
+    <div class="wrap">
+        <div class="head-center reveal">
+            <p class="eyebrow">Our Work</p>
+            <h2 class="sec-title">精選<em>案例</em></h2>
+            <div class="rule"></div>
+            <p class="sec-desc">每一個項目，都是我們專業能力的證明</p>
         </div>
         <div class="cases-grid">
-            <div class="case-item">
-                <div class="case-bg" style="background-image: url('case_brand_strategy.png')"></div>
-                <div class="case-overlay">
-                    <p class="case-category">BRAND STRATEGY</p>
-                    <h3 class="case-title">新銳消費品牌全案</h3>
-                    <p class="case-desc">從0到1打造品牌認知，通過差異化定位與內容營銷，實現首年銷售額破億。</p>
+            <div class="case reveal">
+                <div class="case-bg" style="background-image:url('images/work_brand.jpg')"></div>
+                <div class="case-ov">
+                    <p class="cat">BRAND STRATEGY</p>
+                    <h3>新銳消費品牌全案</h3>
+                    <p>從 0 到 1 打造品牌認知，通過差異化定位與內容營銷，實現首年銷售額破億。</p>
                 </div>
             </div>
-            <div class="case-item">
-                <div class="case-bg" style="background-image: url('case_tech_launch.png')"></div>
-                <div class="case-overlay">
-                    <p class="case-category">DIGITAL MARKETING</p>
-                    <h3 class="case-title">科技品牌新品上市</h3>
-                    <p class="case-desc">整合線上線下資源，打造現象級新品發佈，社交媒體曝光量超5000萬。</p>
+            <div class="case reveal">
+                <div class="case-bg" style="background-image:url('images/work_ip.jpg')"></div>
+                <div class="case-ov">
+                    <p class="cat">IP INCUBATION</p>
+                    <h3>香港保險代理人 IP 孵化</h3>
+                    <p>為持牌代理人搭建雙城生活人設，把港險科普做成系統化內容資產，實現內地高端客戶的持續引流。</p>
                 </div>
             </div>
-            <div class="case-item">
-                <div class="case-bg" style="background-image: url('case_lifestyle_content.png')"></div>
-                <div class="case-overlay">
-                    <p class="case-category">CONTENT CREATION</p>
-                    <h3 class="case-title">生活方式品牌內容矩陣</h3>
-                    <p class="case-desc">構建多平台內容生態，短視頻播放量破億，品牌粉絲增長300%。</p>
+            <div class="case reveal">
+                <div class="case-bg" style="background-image:url('images/work_content.jpg')"></div>
+                <div class="case-ov">
+                    <p class="cat">CONTENT CREATION</p>
+                    <h3>生活方式品牌內容矩陣</h3>
+                    <p>構建多平台內容生態，短視頻播放量破億，品牌粉絲增長 300%。</p>
                 </div>
             </div>
-            <div class="case-item">
-                <div class="case-bg" style="background-image: url('case_pop_up_event.png')"></div>
-                <div class="case-overlay">
-                    <p class="case-category">EVENT MARKETING</p>
-                    <h3 class="case-title">國際品牌快閃活動</h3>
-                    <p class="case-desc">創意空間設計與沉浸式體驗，線下觸達10萬+人次，線上傳播覆蓋百萬用戶。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 聯繫 -->
-    <section class="contact" id="contact">
-        <div class="section-header">
-            <p class="section-label">Contact Us</p>
-            <h2 class="section-title">联系<span>我们</span></h2>
-            <p class="section-desc">期待與您的合作，一起創造更多精彩</p>
-        </div>
-        <div class="contact-content">
-            <a href="mailto:somethingculture@company.com" class="cta-button">發送郵件</a>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <p class="contact-label">EMAIL</p>
-                    <p class="contact-value">somethingculture@company.com</p>
-                </div>
-                <div class="contact-item">
-                    <p class="contact-label">PHONE</p>
-                    <p class="contact-value">+852 5543 8679</p>
-                </div>
-                <div class="contact-item">
-                    <p class="contact-label">LOCATION</p>
-                    <p class="contact-value">中國 · 香港</p>
+            <div class="case reveal">
+                <div class="case-bg" style="background-image:url('images/work_realestate.jpg')"></div>
+                <div class="case-ov">
+                    <p class="cat">LEAD GENERATION</p>
+                    <h3>港島豪宅跨境獲客項目</h3>
+                    <p>以全實拍豪宅內容線觸達內地買家，從踩盤開箱到稅費拆解，構建跨境置業的信任鏈路。</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- 頁腳 -->
-    <footer>
-        <img src="logo_youdongxi.png" alt="有點東西傳媒" class="footer-logo">
-        <p class="footer-text">創意 · 策略 · 影響力</p>
-        <p class="footer-copy">© 2026 有點東西傳媒公司 Something Culture Media Co., Limited. All Rights Reserved.</p>
-    </footer>
+<!-- ========== 聯繫 ========== -->
+<section class="contact" id="contact">
+    <div class="wrap">
+        <div class="reveal">
+            <p class="eyebrow">Contact Us</p>
+            <h2 class="sec-title">聯繫<em>我們</em></h2>
+            <div class="rule"></div>
+            <p class="sec-desc" style="margin:0 auto">無論是品牌全案，還是個人 IP 孵化，都歡迎先聊一次。</p>
+            <div style="margin-top:44px"><a href="mailto:somethingculture@company.com" class="btn solid">發送郵件</a></div>
+        </div>
+        <div class="c-info reveal">
+            <div class="c-item"><p class="l">EMAIL</p><p class="v"><a href="mailto:somethingculture@company.com">somethingculture@company.com</a></p></div>
+            <div class="c-item"><p class="l">PHONE / WHATSAPP</p><p class="v">+852 5543 8679</p></div>
+            <div class="c-item"><p class="l">LOCATION</p><p class="v">中國 · 香港</p></div>
+        </div>
+    </div>
+</section>
 
-    <script>
-        // 平滑滾動
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+<!-- ========== 頁腳 ========== -->
+<footer>
+    <div class="foot">
+        <div>
+            <div class="foot-brand">
+                <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                    <rect x="8" y="8" width="84" height="84" rx="24" stroke="#C9A45C" stroke-width="2.4"/>
+                    <circle cx="50" cy="50" r="25" stroke="#C9A45C" stroke-width="1.1" opacity=".45"/>
+                    <circle cx="50" cy="50" r="12.5" fill="#C9A45C"/>
+                    <circle cx="85" cy="15" r="5.4" fill="#C9A45C"/>
+                </svg>
+                <span class="bt">有點東西傳媒</span>
+            </div>
+            <p class="foot-slogan">創意 · IP · 增長</p>
+            <small>Something Culture Media Co., Limited<br>香港創意營銷與個人 IP 打造</small>
+        </div>
+        <ul class="foot-links">
+            <li><a href="#about">關於我們</a></li>
+            <li><a href="#services">核心服務</a></li>
+            <li><a href="#ip">IP 打造</a></li>
+            <li><a href="#cases">精選案例</a></li>
+            <li><a href="#contact">聯繫我們</a></li>
+        </ul>
+    </div>
+    <p class="copy">© 2026 有點東西傳媒有限公司 Something Culture Media Co., Limited. All Rights Reserved.</p>
+</footer>
 
-        // 滾動動畫
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<script>
+// 導航滾動狀態
+var nav = document.getElementById('nav');
+function onScroll(){ nav.classList.toggle('solid', window.scrollY > 40); }
+window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
+// 移動端選單
+var toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
+toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+links.addEventListener('click', function(e){ if(e.target.tagName === 'A') links.classList.remove('open'); });
 
-        document.querySelectorAll('.service-card, .case-item, .stat-item').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+// 平滑滾動（含導航高度補償）
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+        var t = document.querySelector(this.getAttribute('href'));
+        if(!t) return;
+        e.preventDefault();
+        var y = t.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({top:y, behavior:'smooth'});
+    });
+});
+
+// 滾動進場動畫
+var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+}, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
 </body>
 </html>
